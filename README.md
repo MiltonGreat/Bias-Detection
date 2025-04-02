@@ -1,19 +1,17 @@
 # Bias Detection in Credit Approvals
 
-![screenshot-localhost_8888-2025 04 01-19_18_35](https://github.com/user-attachments/assets/a25f8e65-d2c6-4c5f-a5cb-1b0d19b017c8)
+![screenshot-localhost_8888-2025 04 02-07_48_17](https://github.com/user-attachments/assets/848020bf-35bb-4bad-a75e-e07e5808cfed)
 
 ### Project Overview
 
 This project analyzes potential biases in loan approval decisions based on gender and age. Using the German Credit dataset, the study examines disparities in approval rates across different demographic groups and performs statistical significance tests to identify unfair treatment.
-The scorecard is designed to provide an interpretable and data-driven approach to credit scoring, which can be used in financial lending and risk evaluation.
 
-#### Objectives
+This project can help financial institutions:
 
-- Calculate overall approval rates to establish baseline metrics.
-- Analyze disparities by gender and age to detect potential biases.
-- Perform statistical tests (e.g., Chi-square) to determine significance.
-- Compute Disparate Impact Ratios to quantify bias.
-- Recommend strategies for fairer lending decisions.
+- Audit credit models for gender/age biases
+- Quantify approval rate disparities
+- Generate regulatory-ready fairness reports
+- Implement bias mitigation strategies
 
 ### Dataset
 
@@ -44,18 +42,20 @@ The dataset contains credit application information, including applicant demogra
 
 ### Key Findings
 
-- Overall Approval Rate: 30.00%
-- Gender Bias: Present (Female applicants had higher approval rates)
-- Age Bias: Present (Older applicants faced lower approval odds)
-- Intersectional Effects: Compounding biases were detected across gender and age groups.
-- Disparate Impact Analysis: Several age groups had ratios below 0.8, indicating potential discrimination.
+**Classification Report**
+- High false negatives for Class 0: Only catches 27% of good applicants
+- Over-prediction of defaults: 94% recall for defaults suggests aggressive risk-aversion
+- Accuracy is misleading: 74% looks decent but masks poor non-default detection
 
-### Recommendations
+**Gender Bias Analysis**
+- Both genders under-approved: Model approves only ~12% vs actual 29-34%
+- Male applicants: Higher false denials (FPR 81.1% vs 71.9%), but slightly better approval rates (+3.6% disparity)
+- Statistical parity: Minimal difference (0.006), but error rates favor females (1.13× lower)
 
-- Review and refine approval criteria to reduce bias.
-- Implement fairness-aware algorithms for lending decisions.
-- Conduct periodic bias audits to track fairness over time.
-- Explore alternative creditworthiness indicators that are less prone to historical biases.
+**Age Group Bias Analysis**
+- Young applicants (18-25): Highest actual approval (38.6%) but still under-predicted (12.4%). Highest false denials (FPR 78%).
+- Older applicants (51+): Lowest model approval (10.4%). Best FNR (1.5%) - model is most accurate here.
+- Statistical parity: 26-35 group is reference point; 18-25 has 1.3× higher approval ratio
 
 ### Conclusion
 
